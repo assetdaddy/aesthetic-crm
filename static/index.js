@@ -28,6 +28,10 @@ const modalContentEl = document.getElementById("customer-modal-content");
 const modalCloseEls = document.querySelectorAll("[data-close-modal]");
 const logoutEl = document.getElementById("logout-button");
 
+function getEventElement(event) {
+    return event.target instanceof Element ? event.target : null;
+}
+
 async function fetchCustomers(query = "", options = {}) {
     const { silent = false } = options;
     try {
@@ -248,7 +252,9 @@ async function openCustomerModal(customerId, options = {}) {
         const data = await apiJson(`/api/customers/${customerId}`);
         state.activeCustomer = data.customer;
         modalContentEl.innerHTML = renderCustomerModal(data.customer);
+        modalEl.hidden = false;
         modalEl.classList.remove("modal-hidden");
+        modalEl.setAttribute("aria-hidden", "false");
         document.body.classList.add("overflow-hidden");
         if (!silent) {
             hideBanner(statusBannerEl);
@@ -259,7 +265,10 @@ async function openCustomerModal(customerId, options = {}) {
 }
 
 function closeCustomerModal() {
+    state.activeCustomer = null;
     modalEl.classList.add("modal-hidden");
+    modalEl.hidden = true;
+    modalEl.setAttribute("aria-hidden", "true");
     document.body.classList.remove("overflow-hidden");
 }
 
@@ -356,7 +365,10 @@ searchInputEl.addEventListener("input", (event) => {
 });
 
 customerListEl.addEventListener("click", (event) => {
-    const stepButton = event.target.closest("[data-step]");
+    const target = getEventElement(event);
+    if (!target) return;
+
+    const stepButton = target.closest("[data-step]");
     if (stepButton) {
         const ticketId = stepButton.dataset.ticketId;
         const input = document.querySelector(`[data-ticket-amount="${ticketId}"]`);
@@ -368,21 +380,31 @@ customerListEl.addEventListener("click", (event) => {
         return;
     }
 
-    const deductButton = event.target.closest("[data-deduct-ticket]");
+    const deductButton = target.closest("[data-deduct-ticket]");
     if (deductButton) {
         handleDeduction(deductButton.dataset.deductTicket, deductButton);
         return;
     }
 
-    if (event.target.closest("[data-no-modal]")) return;
-    const card = event.target.closest("[data-customer-card]");
+    if (target.closest("[data-no-modal]")) return;
+    const card = target.closest("[data-customer-card]");
     if (card) {
         openCustomerModal(card.dataset.customerCard);
     }
 });
 
 modalEl.addEventListener("click", (event) => {
-    if (event.target === modalEl || event.target.closest("[data-close-modal]")) {
+    const target = getEventElement(event);
+    if (!target) return;
+
+    if (target.closest("[data-close-modal]")) {
+        event.preventDefault();
+        event.stopPropagation();
+        closeCustomerModal();
+        return;
+    }
+
+    if (target === modalEl) {
         closeCustomerModal();
     }
 });
