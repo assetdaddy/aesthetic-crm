@@ -23,7 +23,6 @@ pydantic_core==2.41.5
 python-dateutil==2.9.0.post0
 python-dotenv==1.2.2
 python-multipart==0.0.22
-pywin32==311
 PyYAML==6.0.3
 reportlab==4.4.10
 six==1.17.0
@@ -36,4 +35,3 @@ uvicorn==0.42.0
 watchfiles==1.1.1
 websockets==16.0
 xlrd==2.0.2
-xlwings==0.33.21
