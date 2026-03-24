@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheongdam Atelier CRM</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="/static/app.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Pretendard", "ui-sans-serif", "system-ui", "sans-serif"],
+                        display: ["Nanum Myeongjo", "serif"],
+                    },
+                    colors: {
+                        blush: "#F3D9E1",
+                        rose: "#E7B8C9",
+                        wine: "#6A334B",
+                        plum: "#412432",
+                        gold: "#C6A46A",
+                    },
+                    boxShadow: {
+                        luxe: "0 28px 90px rgba(92, 46, 68, 0.17)",
+                        card: "0 18px 45px rgba(111, 63, 84, 0.14)",
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="min-h-screen font-sans text-plum">
+    <div class="page-orb"></div>
+
+    <main class="relative mx-auto max-w-7xl px-4 pb-16 pt-5 sm:px-6 lg:px-8">
+        <header class="sticky top-4 z-20">
+            <div class="glass luxury-stroke rounded-[28px] border border-white/45 bg-white/55 px-4 py-3 shadow-card sm:px-6">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#f7dde5] via-[#d8b176] to-[#7c4660] text-lg font-semibold text-white shadow-lg">A</div>
+                        <div>
+                            <p class="font-display text-lg font-bold text-[#5b2b3f]">Cheongdam Atelier</p>
+                            <p class="text-xs uppercase tracking-[0.18em] text-[#9d7a8b]">Premium CRM Suite</p>
+                        </div>
+                    </div>
+                    <nav class="flex flex-wrap gap-2 text-sm">
+                        <a href="/" class="rounded-full bg-[#5b2b3f] px-4 py-2 font-medium text-white">CRM 홈</a>
+                        <a href="/consent" class="rounded-full bg-white/80 px-4 py-2 font-medium text-wine ring-1 ring-[#ead7b8]">전자 동의서</a>
+                        <a href="/settings" class="rounded-full bg-white/80 px-4 py-2 font-medium text-wine ring-1 ring-[#ead7b8]">관리자 설정</a>
+                        <button id="logout-button" type="button" class="rounded-full bg-[#f7e8db] px-4 py-2 font-medium text-wine ring-1 ring-[#e7cfa2]">로그아웃</button>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="mt-6 overflow-hidden rounded-[38px] bg-[linear-gradient(160deg,rgba(255,249,251,.95),rgba(255,241,245,.94),rgba(255,249,242,.96))] px-5 py-6 shadow-luxe sm:px-8 sm:py-8">
+            <div class="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_340px]">
+                <div>
+                    <span class="inline-flex rounded-full border border-[#ead7b8] bg-white/75 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#8c6678]">Cheongdam Signature Edition</span>
+                    <h1 class="mt-5 font-display text-4xl leading-tight text-[#53263a] sm:text-5xl">청담동 럭셔리 핑크 & 골드 톤으로 완성한 에스테틱 CRM</h1>
+                    <p class="mt-4 max-w-2xl text-sm leading-7 text-[#775567] sm:text-base">VIP 고객 보드, 티켓 차감, 고객 상세 모달, 전자 동의서, 서명 미리보기, PDF 다운로드, 관리자 백업까지 한 프로젝트 안에 정리했습니다.</p>
+                    <div class="mt-6 flex flex-wrap gap-3">
+                        <a href="#board" class="rounded-full bg-[#5b2b3f] px-5 py-3 text-sm font-semibold text-white">고객 보드 보기</a>
+                        <a href="/consent" class="rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#7b5567] ring-1 ring-[#e9d7b2]">전자 동의서 열기</a>
+                    </div>
+                </div>
+
+                <aside class="glass luxury-stroke rounded-[30px] border border-white/45 bg-[linear-gradient(160deg,rgba(101,47,71,.95),rgba(189,150,92,.88))] p-5 text-white shadow-card">
+                    <p class="text-xs uppercase tracking-[0.2em] text-white/70">Atelier Mood</p>
+                    <h2 class="mt-3 font-display text-3xl leading-tight">상담, 동의서, 관리가 같은 톤으로 이어지는 운영 보드</h2>
+                    <div class="mt-6 grid grid-cols-2 gap-3">
+                        <div class="rounded-2xl bg-white/12 p-4">
+                            <p class="text-xs text-white/70">소진 임박</p>
+                            <p id="summary-low-balance" class="mt-2 text-3xl font-semibold">-</p>
+                        </div>
+                        <div class="rounded-2xl bg-white/12 p-4">
+                            <p class="text-xs text-white/70">만료 체크</p>
+                            <p id="summary-expiring-soon" class="mt-2 text-3xl font-semibold">-</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <section class="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
+            <article class="luxury-stroke rounded-[28px] bg-white/72 p-5 shadow-card"><p class="text-xs uppercase tracking-[0.18em] text-[#a78392]">Clients</p><p id="summary-customers" class="mt-3 text-3xl font-semibold text-[#5a2e42]">-</p><p class="mt-2 text-sm text-[#8b6b79]">전체 고객 수</p></article>
+            <article class="luxury-stroke rounded-[28px] bg-white/72 p-5 shadow-card"><p class="text-xs uppercase tracking-[0.18em] text-[#a78392]">VIP</p><p id="summary-vips" class="mt-3 text-3xl font-semibold text-[#5a2e42]">-</p><p class="mt-2 text-sm text-[#8b6b79]">상담 집중 고객</p></article>
+            <article class="luxury-stroke rounded-[28px] bg-white/72 p-5 shadow-card"><p class="text-xs uppercase tracking-[0.18em] text-[#a78392]">Tickets</p><p id="summary-remaining" class="mt-3 text-3xl font-semibold text-[#5a2e42]">-</p><p class="mt-2 text-sm text-[#8b6b79]">전체 잔여 횟수</p></article>
+            <article class="luxury-stroke rounded-[28px] bg-white/72 p-5 shadow-card"><p class="text-xs uppercase tracking-[0.18em] text-[#a78392]">Focus</p><p id="summary-focus" class="mt-3 text-3xl font-semibold text-[#5a2e42]">-</p><p class="mt-2 text-sm text-[#8b6b79]">오늘 우선 대응</p></article>
+        </section>
+
+        <div id="board" class="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1.35fr)_330px]">
+            <section class="space-y-5">
+                <div class="luxury-stroke rounded-[30px] bg-white/72 p-5 shadow-card">
+                    <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                        <div>
+                            <p class="text-xs uppercase tracking-[0.2em] text-[#aa8393]">Client Board</p>
+                            <h2 class="mt-2 font-display text-3xl text-[#55283c]">프리미엄 고객 관리 보드</h2>
+                            <p class="mt-2 text-sm text-[#816675]">고객 카드를 클릭하면 남은 티켓, 방문 기록, 동의서를 한 번에 보는 상세 모달이 열립니다.</p>
+                        </div>
+                        <div class="relative min-w-0 sm:min-w-[260px]">
+                            <input id="search-input" type="search" placeholder="고객명, 연락처, 메모 검색" class="w-full rounded-full border-none bg-[#fff8fa] px-5 py-3 pr-11 text-sm text-[#5c3c4b] shadow-inner focus:ring-2 focus:ring-[#be9a5a]/30">
+                            <span class="pointer-events-none absolute inset-y-0 right-4 flex items-center text-[#b28f9e]">⌕</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="status-banner" class="hidden rounded-2xl px-4 py-3 text-sm font-medium"></div>
+                <div id="customer-list" class="grid gap-5"></div>
+            </section>
+
+            <aside class="space-y-5">
+                <section class="luxury-stroke rounded-[30px] bg-[linear-gradient(180deg,rgba(255,255,255,.84),rgba(255,246,248,.92))] p-5 shadow-card">
+                    <p class="text-xs uppercase tracking-[0.2em] text-[#a78392]">Today's Focus</p>
+                    <h2 class="mt-2 font-display text-3xl text-[#55283c]">운영 포인트</h2>
+                    <div id="insight-list" class="mt-5 space-y-3"></div>
+                </section>
+
+                <section class="luxury-stroke rounded-[30px] bg-[linear-gradient(160deg,rgba(104,50,72,.95),rgba(198,164,106,.86))] p-5 text-white shadow-card">
+                    <p class="text-xs uppercase tracking-[0.2em] text-white/65">Management</p>
+                    <h2 class="mt-2 font-display text-3xl">관리자 기능</h2>
+                    <div class="mt-5 space-y-3 text-sm leading-6 text-white/80">
+                        <p>설정 메뉴에서 DB 백업을 즉시 다운로드할 수 있습니다.</p>
+                        <p>동의서는 PDF로 내려받고, 서명 이미지는 관리자 화면에서 바로 미리보기 할 수 있습니다.</p>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </main>
+
+    <div id="customer-modal" class="modal-hidden modal-backdrop fixed inset-0 z-40 flex items-start justify-center overflow-y-auto px-4 py-8 sm:px-6">
+        <div class="mx-auto w-full max-w-6xl">
+            <div class="mb-4 flex justify-end">
+                <button type="button" data-close-modal="true" class="rounded-full bg-white/90 px-4 py-2 text-sm font-semibold text-[#7b5567] ring-1 ring-[#ead7b8]">닫기</button>
+            </div>
+            <div id="customer-modal-content"></div>
+        </div>
+    </div>
+
+    <script type="module" src="/static/index.js"></script>
+</body>
+</html>

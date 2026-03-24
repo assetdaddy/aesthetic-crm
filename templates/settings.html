@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheongdam Atelier Settings</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="/static/app.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Pretendard", "ui-sans-serif", "system-ui", "sans-serif"],
+                        display: ["Nanum Myeongjo", "serif"],
+                    },
+                    colors: { wine: "#6A334B", plum: "#412432" },
+                    boxShadow: {
+                        luxe: "0 28px 90px rgba(92, 46, 68, 0.17)",
+                        card: "0 18px 45px rgba(111, 63, 84, 0.14)",
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="min-h-screen font-sans text-plum">
+    <div class="page-orb"></div>
+    <main class="relative mx-auto max-w-7xl px-4 pb-16 pt-5 sm:px-6 lg:px-8">
+        <header class="sticky top-4 z-20">
+            <div class="glass luxury-stroke rounded-[28px] border border-white/45 bg-white/55 px-4 py-3 shadow-card sm:px-6">
+                <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-[#f7dde5] via-[#d8b176] to-[#7c4660] text-lg font-semibold text-white shadow-lg">A</div>
+                        <div>
+                            <p class="font-display text-lg font-bold text-[#5b2b3f]">Cheongdam Atelier</p>
+                            <p class="text-xs uppercase tracking-[0.18em] text-[#9d7a8b]">Admin Settings</p>
+                        </div>
+                    </div>
+                    <nav class="flex flex-wrap gap-2 text-sm">
+                        <a href="/" class="rounded-full bg-white/80 px-4 py-2 font-medium text-wine ring-1 ring-[#ead7b8]">CRM 홈</a>
+                        <a href="/consent" class="rounded-full bg-white/80 px-4 py-2 font-medium text-wine ring-1 ring-[#ead7b8]">전자 동의서</a>
+                        <a href="/settings" class="rounded-full bg-[#5b2b3f] px-4 py-2 font-medium text-white">관리자 설정</a>
+                        <button id="logout-button" type="button" class="rounded-full bg-[#f7e8db] px-4 py-2 font-medium text-wine ring-1 ring-[#e7cfa2]">로그아웃</button>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <section class="mt-6 overflow-hidden rounded-[38px] bg-[linear-gradient(160deg,rgba(255,249,251,.95),rgba(255,241,245,.94),rgba(255,249,242,.96))] px-5 py-6 shadow-luxe sm:px-8 sm:py-8">
+            <div class="grid gap-6 xl:grid-cols-[minmax(0,1.15fr)_320px]">
+                <div>
+                    <span class="inline-flex rounded-full border border-[#ead7b8] bg-white/75 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-[#8c6678]">Owner Console</span>
+                    <h1 class="mt-5 font-display text-4xl leading-tight text-[#53263a] sm:text-5xl">관리자 설정과 즉시 백업</h1>
+                    <p class="mt-4 max-w-2xl text-sm leading-7 text-[#775567] sm:text-base">현재 데이터베이스 상태를 확인하고, SQLite 백업 파일을 즉시 다운로드할 수 있습니다. Render 배포 시에도 같은 버튼으로 스냅샷을 받을 수 있습니다.</p>
+                </div>
+                <aside class="glass luxury-stroke rounded-[30px] border border-white/45 bg-[linear-gradient(160deg,rgba(101,47,71,.95),rgba(189,150,92,.88))] p-5 text-white shadow-card">
+                    <p class="text-xs uppercase tracking-[0.2em] text-white/70">Backup Strategy</p>
+                    <h2 class="mt-3 font-display text-3xl">운영 백업 권장 흐름</h2>
+                    <div class="mt-5 space-y-3 text-sm leading-6 text-white/80">
+                        <p>1. 주요 상담일 종료 후 백업 다운로드</p>
+                        <p>2. 월별 백업 파일을 별도 클라우드에 보관</p>
+                        <p>3. Render 환경변수는 반드시 별도 보관</p>
+                    </div>
+                </aside>
+            </div>
+        </section>
+
+        <div id="settings-banner" class="mt-6 hidden rounded-2xl px-4 py-3 text-sm font-medium"></div>
+
+        <section class="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_300px]">
+            <div id="settings-overview" class="grid gap-4 md:grid-cols-2"></div>
+            <aside class="space-y-4">
+                <div class="luxury-stroke rounded-[30px] bg-white/78 p-5 shadow-card">
+                    <p class="text-xs uppercase tracking-[0.2em] text-[#a78392]">Database Backup</p>
+                    <h2 class="mt-2 font-display text-3xl text-[#55283c]">즉시 다운로드</h2>
+                    <p class="mt-3 text-sm leading-6 text-[#7b5f6d]">SQLite 파일의 일관된 스냅샷을 생성한 뒤 바로 다운로드합니다.</p>
+                    <a href="/api/admin/backup" class="mt-5 inline-flex rounded-full bg-gradient-to-r from-[#6b334b] to-[#c09a5c] px-5 py-3 text-sm font-semibold text-white shadow-md">DB 백업 다운로드</a>
+                </div>
+
+                <div class="luxury-stroke rounded-[30px] bg-white/78 p-5 shadow-card">
+                    <p class="text-xs uppercase tracking-[0.2em] text-[#a78392]">Render Notes</p>
+                    <div class="mt-3 space-y-2 text-sm leading-6 text-[#7b5f6d]">
+                        <p>`buildCommand`: `pip install -r requirements.txt`</p>
+                        <p>`startCommand`: `bash render_start.sh`</p>
+                        <p>환경변수: `CRM_ADMIN_USERNAME`, `CRM_ADMIN_PASSWORD`, `CRM_SESSION_SECRET`</p>
+                    </div>
+                </div>
+            </aside>
+        </section>
+    </main>
+
+    <script type="module" src="/static/settings.js"></script>
+</body>
+</html>

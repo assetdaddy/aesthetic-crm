@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheongdam Atelier Login</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <link rel="stylesheet" href="/static/app.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ["Pretendard", "ui-sans-serif", "system-ui", "sans-serif"],
+                        display: ["Nanum Myeongjo", "serif"],
+                    },
+                    colors: { wine: "#6A334B", plum: "#412432" },
+                    boxShadow: { luxe: "0 28px 90px rgba(92, 46, 68, 0.17)" },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="min-h-screen font-sans text-plum">
+    <div class="page-orb"></div>
+    <main class="relative flex min-h-screen items-center justify-center px-4 py-10">
+        <section class="w-full max-w-md rounded-[34px] bg-[linear-gradient(160deg,rgba(255,249,251,.97),rgba(255,241,245,.95),rgba(255,249,242,.96))] p-6 shadow-luxe sm:p-8">
+            <div class="text-center">
+                <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-[20px] bg-gradient-to-br from-[#f7dde5] via-[#d8b176] to-[#7c4660] text-xl font-semibold text-white shadow-lg">A</div>
+                <p class="mt-4 font-display text-3xl text-[#53263a]">Cheongdam Atelier</p>
+                <p class="mt-2 text-sm leading-6 text-[#775567]">샵 원장님 전용 관리자 로그인</p>
+            </div>
+
+            <div id="login-banner" class="mt-5 hidden rounded-2xl px-4 py-3 text-sm font-medium"></div>
+
+            <form id="login-form" class="mt-6 space-y-4">
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-[#6b4b5b]">아이디</label>
+                    <input name="username" type="text" autocomplete="username" class="w-full rounded-2xl border-none bg-[#fff8fa] px-4 py-3 text-sm text-[#5c3c4b] ring-1 ring-[#f1dde2] focus:ring-2 focus:ring-[#be9a5a]/30">
+                </div>
+                <div>
+                    <label class="mb-2 block text-sm font-medium text-[#6b4b5b]">비밀번호</label>
+                    <input name="password" type="password" autocomplete="current-password" class="w-full rounded-2xl border-none bg-[#fff8fa] px-4 py-3 text-sm text-[#5c3c4b] ring-1 ring-[#f1dde2] focus:ring-2 focus:ring-[#be9a5a]/30">
+                </div>
+                <button type="submit" class="w-full rounded-full bg-gradient-to-r from-[#6b334b] to-[#c09a5c] px-6 py-3 text-sm font-semibold text-white shadow-md">관리자 로그인</button>
+            </form>
+
+            <div class="mt-6 rounded-[24px] bg-white/75 p-4 text-sm leading-6 text-[#7b5f6d] ring-1 ring-[#f1dde2]">
+                Render 배포 시
+                <span class="rounded-md bg-[#fff4f6] px-1.5 py-0.5 font-mono text-[12px] text-[#6b334b] ring-1 ring-[#f1dde2]">CRM_ADMIN_USERNAME</span>,
+                <span class="rounded-md bg-[#fff4f6] px-1.5 py-0.5 font-mono text-[12px] text-[#6b334b] ring-1 ring-[#f1dde2]">CRM_ADMIN_PASSWORD</span>,
+                <span class="rounded-md bg-[#fff4f6] px-1.5 py-0.5 font-mono text-[12px] text-[#6b334b] ring-1 ring-[#f1dde2]">CRM_SESSION_SECRET</span>
+                환경변수를 반드시 설정해 주세요.
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="/static/login.js"></script>
+</body>
+</html>

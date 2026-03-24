@@ -1,0 +1,101 @@
+/* Shared premium visual system for every page in the CRM project. */
+
+:root {
+    color-scheme: light;
+}
+
+body {
+    background:
+        radial-gradient(circle at top left, rgba(243, 217, 225, 0.96), transparent 34%),
+        radial-gradient(circle at 85% 8%, rgba(233, 215, 178, 0.68), transparent 26%),
+        linear-gradient(180deg, #fff9fb 0%, #fff4f5 56%, #fffaf5 100%);
+}
+
+.glass {
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.luxury-stroke {
+    position: relative;
+}
+
+.luxury-stroke::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.72),
+        rgba(198, 164, 106, 0.62),
+        rgba(231, 184, 201, 0.55)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.page-orb {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+}
+
+.page-orb::before,
+.page-orb::after {
+    content: "";
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(60px);
+}
+
+.page-orb::before {
+    left: -72px;
+    top: 0;
+    width: 280px;
+    height: 280px;
+    background: rgba(243, 217, 225, 0.7);
+}
+
+.page-orb::after {
+    right: 0;
+    top: 96px;
+    width: 320px;
+    height: 320px;
+    background: rgba(236, 220, 184, 0.72);
+}
+
+.modal-backdrop {
+    background: rgba(59, 28, 41, 0.45);
+    backdrop-filter: blur(10px);
+}
+
+.modal-hidden {
+    display: none;
+}
+
+.signature-preview {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 245, 247, 0.92)),
+        linear-gradient(90deg, rgba(234, 215, 184, 0.25), transparent 40%);
+}
+
+.fade-up {
+    animation: fade-up 0.4s ease-out both;
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
